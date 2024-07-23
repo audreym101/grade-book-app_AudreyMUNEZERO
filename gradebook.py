@@ -18,7 +18,7 @@ class Student:
         else:
             self.gpa = 0.0
 
-# Course class definition
+
 class Course:
     def __init__(self, name, trimester, credits, grade=0.0):
         self.name = name
@@ -26,7 +26,7 @@ class Course:
         self.credits = credits
         self.grade = grade
 
-# GradeBook class definition
+
 class GradeBook:
     def __init__(self):
         self.student_list = []
@@ -69,7 +69,7 @@ class GradeBook:
             }
         return None
 
-# User Interface
+
 def main():
     gradebook = GradeBook()
 
@@ -132,4 +132,4 @@ def main():
             print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
-    main()
+    main(}
