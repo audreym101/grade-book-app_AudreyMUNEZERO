@@ -2,6 +2,7 @@ class Student:
     def __init__(self, email, names, date_of_birth, location, credit_score):
         self.email = email
         self.names = names
+        self.gender = gender
         self.date_of_birth = date_of_birth
         self.location = location
         self.credit_score = credit_score
@@ -88,6 +89,7 @@ def main():
         if choice == "1":
             email = input("Enter student email: ")
             names = input("Enter student names: ")
+            gender = input("Enter student gender (Male/Female): ")
             date_of_birth = input("Enter student date of birth (YYYY-MM-DD): ")
             location = input("Enter student location: ")
             credit_score = int(input("Enter student credit score: "))
@@ -117,6 +119,7 @@ def main():
             transcript = gradebook.generate_transcript(student_email)
             if transcript:
                 print(f"Transcript for {transcript['name']}:")
+                print(f"Gender: {transcript['gender']}")
                 print(f"Date of Birth: {transcript['date_of_birth']}")
                 print(f"Location: {transcript['location']}")
                 print(f"Credit Score: {transcript['credit_score']}")
