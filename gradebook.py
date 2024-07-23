@@ -14,10 +14,11 @@ class Student:
 
     def calculate_GPA(self):
         total_points = sum(course.credits for course in self.courses_registered)
-        if total_points > 0:
+        if total_points >5:
             self.gpa = sum(course.grade * course.credits for course in self.courses_registered) / total_points
         else:
-            self.gpa = 0.0
+        self.gpa = 0.0
+
 
 
 class Course:
@@ -33,8 +34,8 @@ class GradeBook:
         self.student_list = []
         self.course_list = []
 
-    def add_student(self, email, names, date_of_birth, location, credit_score):
-        student = Student(email, names, date_of_birth, location, credit_score)
+    def add_student(self, email, names, date_of_birth, location, gender, credit_score):
+        student = Student(email, names, date_of_birth, location, gender, credit_score)
         self.student_list.append(student)
 
     def add_course(self, name, trimester, credits):
@@ -62,6 +63,7 @@ class GradeBook:
             return {
                 "name": student.names,
                 "email": student.email,
+                "gender": student.gender,
                 "date_of_birth": student.date_of_birth,
                 "location": student.location,
                 "credit_score": student.credit_score,
@@ -78,11 +80,12 @@ def main():
         print("\nGrade Book Application")
         print("1. Add student")
         print("2. Add course")
-        print("3. Register student for a course")
-        print("4. Calculate ranking")
-        print("5. Search by grade")
-        print("6. Generate transcript")
-        print("7. Exit")
+        print("3. Add gender")
+        print("4. Register student for a course")
+        print("5. Calculate ranking")
+        print("7. Search by grade")
+        print("8. Generate transcript")
+        print("9. Exit")
 
         choice = input("Choose an action: ")
 
