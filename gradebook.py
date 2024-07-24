@@ -1,5 +1,6 @@
+
 class Student:
-    def __init__(self, email, names, date_of_birth, location, credit_score):
+    def __init__(self, email, names, gender, date_of_birth, location, credit_score):
         self.email = email
         self.names = names
         self.gender = gender
@@ -14,12 +15,10 @@ class Student:
 
     def calculate_GPA(self):
         total_points = sum(course.credits for course in self.courses_registered)
-        if total_points >5:
+        if total_points > 0:
             self.gpa = sum(course.grade * course.credits for course in self.courses_registered) / total_points
         else:
-        self.gpa = 0.0
-
-
+            self.gpa = 0.0
 
 class Course:
     def __init__(self, name, trimester, credits, grade=0.0):
@@ -34,8 +33,8 @@ class GradeBook:
         self.student_list = []
         self.course_list = []
 
-    def add_student(self, email, names, date_of_birth, location, gender, credit_score):
-        student = Student(email, names, date_of_birth, location, gender, credit_score)
+    def add_student(self, email, names, gender, date_of_birth, location, credit_score):
+        student = Student(email, names, gender, date_of_birth, location, credit_score)
         self.student_list.append(student)
 
     def add_course(self, name, trimester, credits):
@@ -63,15 +62,14 @@ class GradeBook:
             return {
                 "name": student.names,
                 "email": student.email,
-                "gender": student.gender,
                 "date_of_birth": student.date_of_birth,
                 "location": student.location,
                 "credit_score": student.credit_score,
+                "gender": student.gender,
                 "courses": [(course.name, course.grade, course.credits) for course in student.courses_registered],
                 "gpa": student.gpa
             }
         return None
-
 
 def main():
     gradebook = GradeBook()
@@ -80,12 +78,11 @@ def main():
         print("\nGrade Book Application")
         print("1. Add student")
         print("2. Add course")
-        print("3. Add gender")
-        print("4. Register student for a course")
-        print("5. Calculate ranking")
-        print("7. Search by grade")
-        print("8. Generate transcript")
-        print("9. Exit")
+        print("3. Register student for a course")
+        print("4. Calculate ranking")
+        print("5. Search by grade")
+        print("6. Generate transcript")
+        print("7. Exit")
 
         choice = input("Choose an action: ")
 
@@ -96,7 +93,7 @@ def main():
             date_of_birth = input("Enter student date of birth (YYYY-MM-DD): ")
             location = input("Enter student location: ")
             credit_score = int(input("Enter student credit score: "))
-            gradebook.add_student(email, names, date_of_birth, location, credit_score)
+            gradebook.add_student(email, names, gender, date_of_birth, location, credit_score)
         elif choice == "2":
             name = input("Enter course name: ")
             trimester = input("Enter course trimester: ")
@@ -122,10 +119,10 @@ def main():
             transcript = gradebook.generate_transcript(student_email)
             if transcript:
                 print(f"Transcript for {transcript['name']}:")
-                print(f"Gender: {transcript['gender']}")
                 print(f"Date of Birth: {transcript['date_of_birth']}")
                 print(f"Location: {transcript['location']}")
                 print(f"Credit Score: {transcript['credit_score']}")
+                print(f"Gender: {transcript['gender']}")
                 for course in transcript['courses']:
                     print(f"{course[0]}: {course[1]} (Credits: {course[2]})")
                 print(f"GPA: {transcript['gpa']:.2f}")
@@ -139,3 +136,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
